@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/GyaneshSamanta/RU_Hacks#readme",
   "dependencies": {
-    "@openscreen/sdk": "^0.3.0"
+    "@openscreen/sdk": "^0.3.0",
+    "dotenv": "^16.0.0"
   }
 }

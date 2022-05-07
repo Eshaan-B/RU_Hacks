@@ -1,10 +1,11 @@
+require('dotenv').config({path:'./keys.env'});
 const {Openscreen} = require('@openscreen/sdk')
 
-const PROJECT_ID = '**PROJECT_ID**' // add project ID from openscreen dashboard
+const PROJECT_ID =  '9bc2845b-1ed8-449e-a737-327cc55836dd' // add project ID from openscreen dashboard
 
 const os = new Openscreen().config({ // add from openscreen dashboard
-  key: '**KEY**',
-  secret: '**SECRET**',
+  key: '6wfuSGve45zXcMZEvq',
+  secret: 'SeUUWcnxFO9FAX71nBm8QIvG',
 })
 
 
