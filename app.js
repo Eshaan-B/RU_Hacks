@@ -1,34 +1,20 @@
+
 require('dotenv').config({path:'./keys.env'});
-const {Openscreen} = require('@openscreen/sdk')
+const morgan = require('morgan')
+const express = require('express');
 
-const PROJECT_ID =  '9bc2845b-1ed8-449e-a737-327cc55836dd' // add project ID from openscreen dashboard
+const bodyParser = require('body-parser');
 
-const os = new Openscreen().config({ // add from openscreen dashboard
-  key: '6wfuSGve45zXcMZEvq',
-  secret: 'SeUUWcnxFO9FAX71nBm8QIvG',
-})
+const qrController = require('./controllers/qrController');
+
+const app=express();
+
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 
-async function myFirstQRCode(event) {
-  const res = await os
-    .project(PROJECT_ID)
-    .assets()
-    .create({
-      name: 'Openscreen website',
-      description: 'Dynamic QR code to https://openscreen.com',
-      qrCodes: [
-        {
-          intent: 'https://openscreen.com',
-          intentType: 'DYNAMIC_REDIRECT',
-        },
-      ],
-    })
+//app.use('/',qrController.testRoute);
+app.post('/createQR',qrController.createQR);
 
-  const {qrCodeId} = res.asset.qrCodes[0]
-
-  const qrCode = await os.qrCode(qrCodeId).get({format: 'PNG', dataUrl: true})
-
-  await os.saveQrImageDataToFile(qrCode, 'my-first-qr.png')
-}
-
-myFirstQRCode().catch(console.error)
+app.listen(3000);
