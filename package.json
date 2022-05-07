@@ -1,0 +1,28 @@
+{
+  "name": "ru_hacks",
+  "version": "1.0.0",
+  "description": "official submission to RU hacks 2022",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GyaneshSamanta/RU_Hacks.git"
+  },
+  "keywords": [
+    "openscreen",
+    "API",
+    "node.js",
+    "react",
+    "MERN",
+    "QR",
+    "codes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GyaneshSamanta/RU_Hacks/issues"
+  },
+  "homepage": "https://github.com/GyaneshSamanta/RU_Hacks#readme"
+}
