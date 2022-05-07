@@ -1,7 +1,10 @@
 require("dotenv").config({ path: "../keys.env" });
 const { Openscreen } = require("@openscreen/sdk");
+const sdk = require("api")("@os-api/v1.0#134y6gwl26ji0cw");
 
-const PROJECT_ID = '9bc2845b-1ed8-449e-a737-327cc55836dd';
+const PROJECT_ID = "9bc2845b-1ed8-449e-a737-327cc55836dd";
+
+var accessToken;
 
 const os = new Openscreen().config({
   key: process.env.OS_API_KEY,
@@ -14,9 +17,24 @@ exports.testRoute = (req, res, next) => {
   res.end();
 };
 
+exports.getAccessToken = (req, res, next) => {
+  sdk
+    .GetAccessToken({
+      accessKey: process.env.OS_API_KEY,
+      accessSecret: process.env.OS_API_SECRET,
+    })
+    .then((res) => {
+      console.log(res);
+      accessToken=res.body;
+
+    })
+    .catch((err) => console.error(err));
+  res.end();
+};
+
 exports.createQR = async (req, res, next) => {
   try {
-      console.log(req.body.name,req.body.description,req.bodyintent);
+    console.log(req.body.name, req.body.description, req.bodyintent);
     res = await os
       .project(PROJECT_ID)
       .assets()
@@ -30,28 +48,35 @@ exports.createQR = async (req, res, next) => {
           },
         ],
       });
-      console.log("QR generated successfully")
+    console.log("QR generated successfully");
   } catch (err) {
     console.log("Error in creating QR CODE");
     console.error(err.message);
   }
-// THIS DOWNLOADS THE QR CODE TO YOUR SERVER
+  // THIS DOWNLOADS THE QR CODE TO YOUR SERVER
 
-//   try {
-//     const { qrCodeId } = res.asset.qrCodes[0];
+  //   try {
+  //     const { qrCodeId } = res.asset.qrCodes[0];
 
-//     const qrCode = await os
-//       .qrCode(qrCodeId)
-//       .get({ format: "PNG", dataUrl: true });
+  //     const qrCode = await os
+  //       .qrCode(qrCodeId)
+  //       .get({ format: "PNG", dataUrl: true });
 
-//     await os.saveQrImageDataToFile(qrCode, "my-first-qr.png");
-//   } catch (err) {
-//     console.log("Error in fetching generated QR");
-//     console.error(err);
-//   }
+  //     await os.saveQrImageDataToFile(qrCode, "my-first-qr.png");
+  //   } catch (err) {
+  //     console.log("Error in fetching generated QR");
+  //     console.error(err);
+  //   }
 
   res.status(200).send("Creation successful");
 };
 
-
-//myFirstQRCode().catch(console.error)
+exports.getQRCodes = async (req, res, next) => {
+  sdk
+    .GetQrCodesByAccountId({ accountId: process.env.OS_ACCOUNT_ID })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.error(err));
+  res.end();
+};
