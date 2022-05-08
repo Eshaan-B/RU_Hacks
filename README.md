@@ -10,7 +10,7 @@ Since the COVID outbreak, most events, fests and workshops have taken a turn to 
 On the backend, we are generating dynamic QR Codes with the help of Openscreen, these QR codes are then fetched by our backend and sent to our React web application. This is useful for the usecase where we have an event list and need to check all the workshops, fests, events scheduled. 
 
 ## How we built it 🔧
-
+Using Openscreen we generate dynamic QR values, which are then fetched through the Openscreen API to our local host. The QR data is fetched as an object which contains various details ranging from QR id, date of creation etc. When our Frontend (React Web app) requests for the data, the data is 
 
 ## Tech Stack 🔨
 1. React.js
