@@ -81,27 +81,31 @@ exports.getQRCodes = async (req, res, next) => {
       projectId: "9bc2845b-1ed8-449e-a737-327cc55836dd",
     })
     .then((res) => {
-      console.log(res.qrCodes);
+     // console.log(res.qrCodes);
       var qrCodes = res.qrCodes;
-
       //saving qrcode images
-      qrCodes.forEach(async (qrCodes) => {
-        var qrId = qrCodes.qrCodeId;
+      qrCodes.forEach(qrCode=>{
+        console.log(`${qrCode.qrCodeId} has been scaned ${qrCode.scanCount} times`);
+      })
+      //saving images
+      qrCodes.forEach(async (qrCode) => {
+        var qrId = qrCode.qrCodeId;
 
         try {
-          const qrCode = await os
+          const qr = await os
             .qrCode(qrId)
             .get({ format: "PNG", dataUrl: true });
-          await os.saveQrImageDataToFile(qrCode, `qrImages/${qrId}.png`);
+          await os.saveQrImageDataToFile(qr, `qrImages/${qrId}.png`);
+
           console.log(`${qrId} saved\n`);
         } catch (err) {
           console.log("Error in fetching generated QR");
           console.error(err);
         }
 
-        // ===============================
       });
     })
     .catch((err) => console.error(err));
   // TODO: SEND THE IMAGE
 };
+

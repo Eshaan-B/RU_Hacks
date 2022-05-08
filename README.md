@@ -35,7 +35,6 @@ Using Openscreen we generate dynamic QR values, which are then fetched through t
 3. Node.js packages and their use. 
 
 
-
 ## What's next ⏭
 
 1. Sort the events in ascending order so people can understand the timelines better. 
