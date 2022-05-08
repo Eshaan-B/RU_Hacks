@@ -25,7 +25,7 @@ exports.getAccessToken = (req, res, next) => {
     })
     .then((res) => {
       console.log(res);
-      accessToken=res.token;
+      accessToken = res.token;
       console.log(accessToken);
 
     })
@@ -56,25 +56,52 @@ exports.createQR = async (req, res, next) => {
   }
   // THIS DOWNLOADS THE QR CODE TO YOUR SERVER
 
-  //   try {
-  //     const { qrCodeId } = res.asset.qrCodes[0];
+  // try {
+  //   const { qrCodeId } = res.asset.qrCodes[0];
+  //   const qrCode = await os
+  //     .qrCode(qrCodeId)
+  //     .get({ format: "PNG", dataUrl: true });
+  //   await os.saveQrImageDataToFile(qrCode, "my-first-qr.png");
+  // }
 
-  //     const qrCode = await os
-  //       .qrCode(qrCodeId)
-  //       .get({ format: "PNG", dataUrl: true });
-
-  //     await os.saveQrImageDataToFile(qrCode, "my-first-qr.png");
-  //   } catch (err) {
-  //     console.log("Error in fetching generated QR");
-  //     console.error(err);
-  //   }
+  // catch (err) {
+  //   console.log("Error in fetching generated QR");
+  //   console.error(err);
+  // }
 
   res.status(200).send("Creation successful");
 };
 
 exports.getQRCodes = async (req, res, next) => {
-  sdk.auth('eyJraWQiOiJ4ZFFwRkoxVDRRWnJMWXJYVHR4VVA5SVUxMGh3M240K0FTS1hWcWxaZkNJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIwNzUzZDg3ZS1kY2MwLTRlM2QtYTUyMy02OWQ0ZWUzN2VjZGUiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9Bd2ZOUzA4bHMiLCJjbGllbnRfaWQiOiI2MXJrM3JhOW9sbjJhMDhlMm9oNG12dnE3ayIsIm9yaWdpbl9qdGkiOiJhMDVlZTJmNS1iNzJiLTQzMGUtODY3Ny05YjhjMGZmMGNkZTQiLCJldmVudF9pZCI6ImYzY2E5Nzc1LTI0MWUtNDIwYi1iNmU2LTM0MTMxNTRiNWU1MSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTE5NDY0NDcsImV4cCI6MTY1MTk4OTY0NywiaWF0IjoxNjUxOTQ2NDQ3LCJqdGkiOiIyYWNkMDdhYy0xMGYxLTRmN2MtYTVkMC05MDg2MTJkMjI4YTAiLCJ1c2VybmFtZSI6IjZ3ZnVzZ3ZlNDV6eGNtemV2cSJ9.ObG3OqhtMHU1g_NBkfFOJ5ZfiLr9ZXy6KyzqXDKVjHfsDLskGqWMykdt5gcTtOFrVOqICGPcah9lk_H2dmjv-auuXpAgBFDXluVVslMGE_jSzS-ULoswO1h4PkEmXZfA8L0XeZFYWzA7E5Fc3x6Sa9nbwjEUoU4rf1j8xKnB6N2tB-k7djdh0kWnA81FrH7tW0CLgZgbU7FAvPOhf516z11LojjGjsRv2r1g7JEaJfNvlpTy3uumtMofFSSXpSS8y1KlqGbry-_F05UD7ygnoXhEkqI9u1qvDnKiMGw6QWOoyZmv7kCM00PtFkWBylSfSiQsjmrNvJ_dUTjjUvt0Vg');
-  sdk.GetQrCodesByProjectId({limit: '10', projectId: '9bc2845b-1ed8-449e-a737-327cc55836dd'})
-    .then(res => console.log(res))
+  sdk.auth('eyJraWQiOiJ4ZFFwRkoxVDRRWnJMWXJYVHR4VVA5SVUxMGh3M240K0FTS1hWcWxaZkNJPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIwNzUzZDg3ZS1kY2MwLTRlM2QtYTUyMy02OWQ0ZWUzN2VjZGUiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9Bd2ZOUzA4bHMiLCJjbGllbnRfaWQiOiI2MXJrM3JhOW9sbjJhMDhlMm9oNG12dnE3ayIsIm9yaWdpbl9qdGkiOiJhNmNlYmM5Ni02MjNlLTRiNTktYmYzNS1lNWQ5NjU0NjBmMWUiLCJldmVudF9pZCI6IjQ0MmY4ZTcyLWQ1NmMtNDU5ZC1hZTUwLTZjNzM2ZmIyZTRmZCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTE5ODY4MzUsImV4cCI6MTY1MjAzMDAzNCwiaWF0IjoxNjUxOTg2ODM1LCJqdGkiOiI3ZTRhZGI0Yy0xNzE0LTRkYzYtYmY5MC0wMTU1MTFjZGJlN2UiLCJ1c2VybmFtZSI6IjZ3ZnVzZ3ZlNDV6eGNtemV2cSJ9.hGt6gilc6i8otQQU22Qp9XtpSIuyO-1Jsk5KJRC3DT46JpUsLZ8sTiK65bnyw6dPOwsDVth-ymdmJ98MDf8unOQwmUZBEKypAvNlIAmHtJNy9N9N4bVQF-NBlUTIPZcfYqf3bovw8yKQv4jvKIz4o5o7wZk5fw-hAP-z9fajA2NcwXOhw79BKmT7OicWcwQy787aGYu0Q_n5DHa6JeiBiAqmEUe5KB63uEfW4vJKSP39kAdBcGKm5NE34eYWZVF1lHix3OAVoR_j8g8z6PJNJCHrT9HtjmGIuuBL3sCHxEMO3wOrXrXvWF0avlnLX8t8N0ia6L9a79O85CXBYxLODw');
+  sdk.GetQrCodesByProjectId({ limit: '10', projectId: '9bc2845b-1ed8-449e-a737-327cc55836dd' })
+    .then(res => {
+      console.log(res.qrCodes);
+      var qrCodes = res.qrCodes;
+      //saving qrcode images
+      qrCodes.forEach(async (qrCode) =>  {
+        var qrId = qrCode.qrCodeId;
+
+        try {
+       
+          const qrCode = await os
+            .qrCode(qrId)
+            .get({ format: "PNG", dataUrl: true });
+          await os.saveQrImageDataToFile(qrCode, "qr.png");
+          console.log(`${qrId} saved\n`);
+        }
+      
+        catch (err) {
+          console.log("Error in fetching generated QR");
+          console.error(err);
+        }
+        
+       // ===============================
+        
+      });
+    })
     .catch(err => console.error(err));
+  // TODO: SEND THE IMAGE
 };
+
+
