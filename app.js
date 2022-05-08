@@ -19,4 +19,4 @@ app.get('/getAccessToken',qrController.getAccessToken);
 app.post('/createQR',qrController.createQR);
 app.get('/getQRCode',qrController.getQRCodes); //by projecId
 
-app.listen(6666);
+app.listen(3000);
