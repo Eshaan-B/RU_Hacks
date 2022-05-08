@@ -16,7 +16,9 @@ app.use(express.urlencoded({extended:false}));
 
 //app.use('/',qrController.testRoute);
 app.get('/getAccessToken',qrController.getAccessToken);
+
 app.post('/createQR',qrController.createQR);
-app.get('/getQRCode',qrController.getQRCodes); //by projecId
+
+app.get('/getQRCodes',qrController.getQRCodes); //by projecId
 
 app.listen(3000);
