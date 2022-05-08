@@ -78,16 +78,18 @@ exports.getQRCodes = async (req, res, next) => {
     .then(res => {
       console.log(res.qrCodes);
       var qrCodes = res.qrCodes;
+      
       //saving qrcode images
-      qrCodes.forEach(async (qrCode) =>  {
-        var qrId = qrCode.qrCodeId;
+      (qrCodes).forEach(async (qrCodes) =>  {
+        
+        var qrId = qrCodes.qrCodeId;
 
         try {
        
           const qrCode = await os
             .qrCode(qrId)
             .get({ format: "PNG", dataUrl: true });
-          await os.saveQrImageDataToFile(qrCode, "qr.png");
+          await os.saveQrImageDataToFile(qrCode, `qrImages/${qrId}.png`);
           console.log(`${qrId} saved\n`);
         }
       
